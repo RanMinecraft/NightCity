@@ -4,8 +4,8 @@ import cc.ranmc.city.util.TitleUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import top.minepay.api.events.MinePayPreTradingEvent;
-import top.minepay.bean.KitItem;
 import top.minepay.bean.TradeInfo;
+import top.minepay.common.enums.TradeType;
 
 public class MinePayListener implements Listener {
 
@@ -17,8 +17,7 @@ public class MinePayListener implements Listener {
     @EventHandler
     public void onMinePayPreTradingEvent(MinePayPreTradingEvent event) {
         TradeInfo info = event.getTradeInfo();
-        KitItem kitItem = info.getKitItem();
-        if ("定制称号".equals(kitItem.getName())) {
+        if (info.getTradeType() == TradeType.POINT) {
             info.setPrice(TitleUtil.getPrice(info.getPlayerName()) * 100);
         }
     }
