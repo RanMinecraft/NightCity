@@ -10,11 +10,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BasicUtil {
 
@@ -51,6 +54,36 @@ public class BasicUtil {
                     .replace("%player_z%", String.valueOf(p.getLocation().getBlockZ()));
         }
         return text;
+    }
+
+    public static String rgbString(@NotNull String text) {
+        return translateColorCodes(color(text));
+    }
+
+    private static String translateColorCodes(String str) {
+        Matcher matcher = Pattern.compile("&#([0-9a-fA-F]){6}|&#([0-9a-fA-F]){3}|§#([0-9a-fA-F]){6}|§#([0-9a-fA-F]){3}").matcher(str);
+
+        StringBuilder sb;
+        String hex;
+        for(sb = new StringBuilder(); matcher.find(); matcher.appendReplacement(sb, net.md_5.bungee.api.ChatColor.of(hex.substring(1)).toString())) {
+            hex = matcher.group();
+            if (hex.length() == 5) {
+                hex = hex.substring(0, 2) + doubleCharacters(hex.substring(2));
+            }
+        }
+
+        matcher.appendTail(sb);
+        return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('§', sb.toString());
+    }
+
+    private static String doubleCharacters(String str) {
+        StringBuilder sb = new StringBuilder();
+        char[] var2 = str.toCharArray();
+        for (char c : var2) {
+            sb.append(c);
+            sb.append(c);
+        }
+        return sb.toString();
     }
 
     public static String getLocation(Location location) {

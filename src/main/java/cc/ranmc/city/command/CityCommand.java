@@ -3,6 +3,7 @@ package cc.ranmc.city.command;
 import cc.ranmc.city.Main;
 import cc.ranmc.city.util.BasicUtil;
 import cc.ranmc.city.util.MoneyUtil;
+import cc.ranmc.city.util.TitleUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -36,8 +37,15 @@ public class CityCommand implements CommandExecutor {
                 return true;
             }
             // 存钱
-            if (args[0].equalsIgnoreCase("money") && sender instanceof Player player) {
+            if (args[0].equalsIgnoreCase("money") &&
+                    sender instanceof Player player) {
                 MoneyUtil.openGUI(player);
+                return true;
+            }
+            // 自定义称号
+            if (args[0].equalsIgnoreCase("title") &&
+                    sender instanceof Player player) {
+                TitleUtil.openGUI(player);
                 return true;
             }
         }
@@ -58,6 +66,15 @@ public class CityCommand implements CommandExecutor {
                 for (String ipl : ipList) {
                     sender.sendMessage(BasicUtil.color("&e- " + ipl));
                 }
+                return true;
+            }
+            // 给予自定义称号
+            if (args[0].equalsIgnoreCase("title")) {
+                if (!sender.hasPermission("city.admin")) {
+                    sender.sendMessage("§b[夜城] §c你没有足够的权限执行");
+                    return true;
+                }
+                TitleUtil.give(args[1]);
                 return true;
             }
         }

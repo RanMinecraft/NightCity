@@ -31,6 +31,11 @@
             <id>viaversion-repo</id>
             <url>https://repo.viaversion.com</url>
         </repository>
+        <repository>
+            <id>handy-repository-releases</id>
+            <name>handy-repository</name>
+            <url>https://nexus.handyplus.cn/releases</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -82,6 +87,22 @@
             <version>1.4.1-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>/users/rain/desktop/Project/CatSeedLogin-1.4.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.handy.playertitle</groupId>
+            <artifactId>PlayerTitle</artifactId>
+            <version>4.8.0</version>
+            <scope>system</scope>
+            <systemPath>/users/rain/desktop/Project/PlayerTitle-4.11.2-free.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>top.minepay</groupId>
+            <artifactId>MinePayApi</artifactId>
+            <version>1.8-RELEASE</version>
+            <scope>system</scope>
+            <systemPath>/users/rain/desktop/Project/MinePay-Alpha-3.8.4.jar</systemPath>
         </dependency>
 
         <!--<dependency>

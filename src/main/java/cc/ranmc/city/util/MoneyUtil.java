@@ -17,7 +17,7 @@ import static cc.ranmc.city.util.BasicUtil.returnItem;
 public class MoneyUtil {
 
     public static final ItemStack PANE = BasicUtil.getItem(Material.GRAY_STAINED_GLASS_PANE, 1, " ");
-    public static final String GUI_TITLE = BasicUtil.color("&9&l夜城 &0- &e&l存入现金");
+    public static final String BANK_GUI_TITLE = BasicUtil.color("&9&l夜城 &0- &e&l存入现金");
 
     public static ItemStack getMoneyItem(int money) {
         ItemStack item = BasicUtil.getItem(Material.FIRE_CHARGE, 1,
@@ -49,7 +49,7 @@ public class MoneyUtil {
     }
 
     public static void openGUI(Player player) {
-        Inventory inventory = Bukkit.createInventory(null, 54, GUI_TITLE);
+        Inventory inventory = Bukkit.createInventory(null, 54, BANK_GUI_TITLE);
 
         inventory.setItem(45, BasicUtil.getItem(Material.RED_STAINED_GLASS_PANE, 1, "&c返回菜单"));
         inventory.setItem(46, PANE);
