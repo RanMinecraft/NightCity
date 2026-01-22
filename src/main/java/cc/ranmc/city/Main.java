@@ -128,14 +128,6 @@ public class Main extends JavaPlugin implements Listener{
         treasureYml = new File(getDataFolder(), "treasure.yml");
         if (!treasureYml.exists()) saveResource("treasure.yml", true);
         treasureData = YamlConfiguration.loadConfiguration(treasureYml);
-		
-        // Vault插件
-        if (Bukkit.getPluginManager().isPluginEnabled("Vault")) {
-            econ = Objects.requireNonNull(getServer().getServicesManager().getRegistration(Economy.class)).getProvider();
-            print("§b[夜城] §a成功加载Vault插件");
-        } else {
-            print("§b[夜城] §c无法找到Vault插件,部分功能受限");
-        }
 
         // 插件
         if (checkPlugin("Vault")) {
@@ -144,6 +136,7 @@ public class Main extends JavaPlugin implements Listener{
         if (checkPlugin("PlaceholderAPI")) {
             new Papi().register();
         }
+		checkPlugin("PlayerTitle");
         checkPlugin("CatSeedLogin");
         checkPlugin("ViaVersion");
 	}
