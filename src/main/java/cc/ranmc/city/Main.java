@@ -139,6 +139,7 @@ public class Main extends JavaPlugin implements Listener{
 		checkPlugin("PlayerTitle");
         checkPlugin("CatSeedLogin");
         checkPlugin("ViaVersion");
+		checkPlugin("MinePay");
 	}
 	
 }
