@@ -29,7 +29,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.milkbowl.vault.economy.Economy;
 
 import static cc.ranmc.city.util.BasicUtil.checkPlugin;
-import static cc.ranmc.city.util.BasicUtil.print;
 
 public class Main extends JavaPlugin implements Listener{
 
@@ -41,7 +40,7 @@ public class Main extends JavaPlugin implements Listener{
   	private Economy econ;
     @Getter
     private static Main instance;
-    
+
 	@Override
 	public void onEnable() {
         instance = this;

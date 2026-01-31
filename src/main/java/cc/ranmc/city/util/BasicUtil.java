@@ -23,7 +23,7 @@ public class BasicUtil {
 
     // 输出日志
     public static void print(String message) {
-        Bukkit.getConsoleSender().sendMessage(message);
+        Bukkit.getConsoleSender().sendMessage(color(message));
     }
 
     // 服务器输出

@@ -4,8 +4,6 @@ import cc.baka9.catseedlogin.bukkit.CatSeedLoginAPI;
 import cc.ranmc.city.Main;
 import cc.ranmc.city.util.BasicUtil;
 import cc.ranmc.city.util.TreasureUtil;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -24,7 +22,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import static cc.ranmc.city.util.BasicUtil.say;
 import static cc.ranmc.city.util.BasicUtil.color;
 import static cc.ranmc.city.util.LoginUtil.sendDialog;
 import static org.bukkit.event.block.Action.RIGHT_CLICK_AIR;
