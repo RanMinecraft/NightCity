@@ -33,7 +33,7 @@ public class TitleUtil {
     public static final String TITLE_BUFF_GUI_TITLE = BasicUtil.color("&9&l夜城 &0- &e&l定制属性");
     public static final ItemStack PANE = BasicUtil.getItem(Material.GRAY_STAINED_GLASS_PANE, 1, " ");
     public static final int TITLE_NAME_PRICE = 20;
-    public static final int TITLE_BUFF_PRE_PRICE = 30;
+    public static final int TITLE_BUFF_PRE_PRICE = 20;
 
     public static void openGUI(Player player) {
         Inventory inventory = Bukkit.createInventory(null, 9, TITLE_GUI_TITLE);
