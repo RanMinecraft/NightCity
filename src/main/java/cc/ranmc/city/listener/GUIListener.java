@@ -89,7 +89,7 @@ public class GUIListener implements Listener {
                 }
             }
             if (event.getRawSlot() == 6) {
-                player.chat("/mp buy 定制称号");
+                player.chat("/mp point " + TitleUtil.getPrice(player.getName()));
                 return;
             }
         }
