@@ -152,6 +152,7 @@ public class TitleUtil {
     }
 
     public static boolean checkFormat(String input) {
+        if (input.charAt(0) == '#') return false;
         for (int i = 1; i < input.length(); i++) {
             if (input.charAt(i) == '&' || input.charAt(i) == '§') {
                 char prevChar = input.charAt(i - 1);
