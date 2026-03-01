@@ -97,7 +97,7 @@ public class TitleUtil {
         TitleListParam param = new TitleListParam();
         param.setAmount(99999);
         param.setIsHide(1);
-        param.setTitleName(getName(playerName));
+        param.setTitleName("&f[" + getName(playerName) + "&f]");
         param.setDescription(playerName + "定制专属称号");
         param.setBuyTypeEnum(BuyTypeEnum.ACTIVITY);
         param.setTitleBuffs(buffMap.getOrDefault(playerName, new ArrayList<>()));

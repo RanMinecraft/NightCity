@@ -5,7 +5,6 @@ import cc.ranmc.city.util.InputUtil;
 import cc.ranmc.city.util.MoneyUtil;
 import cc.ranmc.city.util.TitleUtil;
 import com.handy.playertitle.api.param.TitleBuffParam;
-import com.handy.playertitle.constants.BuffApplyTypeEnum;
 import com.handy.playertitle.constants.BuffTypeEnum;
 import com.handy.playertitle.lib.attribute.PotionEffectParam;
 import org.bukkit.ChatColor;
