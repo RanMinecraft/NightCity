@@ -24,7 +24,7 @@ public class CatSeedLoginListener implements Listener {
         Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "eco give " + player.getName() + " 500");
         Component welcome = Component.text(color("&a[点击欢迎]"))
                 .hoverEvent(Component.text("点击欢迎" + player.getName()))
-                .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.SUGGEST_COMMAND, "欢迎 " + player.getName() + "~"));
+                .clickEvent(ClickEvent.suggestCommand("欢迎 " + player.getName() + "~"));
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (p != player) p.sendMessage(welcome);
         }
