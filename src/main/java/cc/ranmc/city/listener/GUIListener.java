@@ -4,9 +4,11 @@ import cc.ranmc.city.util.BasicUtil;
 import cc.ranmc.city.util.InputUtil;
 import cc.ranmc.city.util.MoneyUtil;
 import cc.ranmc.city.util.TitleUtil;
-import com.handy.playertitle.api.param.TitleBuffParam;
-import com.handy.playertitle.constants.BuffTypeEnum;
-import com.handy.playertitle.lib.attribute.PotionEffectParam;
+import cn.handyplus.title.api.param.TitleBuffParam;
+import cn.handyplus.title.constants.BuffApplyTypeEnum;
+import cn.handyplus.title.constants.BuffTypeEnum;
+import cn.handyplus.title.lib.attribute.PotionEffectParam;
+import com.alibaba.fastjson2.JSONObject;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -46,7 +48,6 @@ public class GUIListener implements Listener {
      */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-
         Player player = (Player) event.getWhoClicked();
         ItemStack clicked = event.getCurrentItem();
         Inventory inventory = event.getClickedInventory();
@@ -98,14 +99,20 @@ public class GUIListener implements Listener {
             if (clicked == null) return;
 
             if (clicked.getType() == Material.ENCHANTED_BOOK) {
-                TitleBuffParam buff = new TitleBuffParam();
-                buff.setBuffType(BuffTypeEnum.POTION_EFFECT);
-                PotionEffectParam potion = new PotionEffectParam();
                 String itemName = ChatColor.stripColor(clicked.getItemMeta().getDisplayName());
-                potion.setPotionName(itemName.replaceAll("[^a-zA-Z_]", ""));
+                String potionName = itemName.replaceAll("[^a-zA-Z_]", "");
+                String chineseName = itemName.replaceAll("[^一-龥]", "");
+
+                PotionEffectParam potion = new PotionEffectParam();
+                potion.setPotionName(potionName);
                 potion.setPotionChinesizationName(itemName.replaceAll("[^一-龥]", ""));
                 potion.setPotionLevel(1);
-                buff.setPotionEffectParam(potion);
+
+                TitleBuffParam buff = new TitleBuffParam();
+                buff.setBuffType(BuffTypeEnum.POTION_EFFECT);
+                buff.setBuffContent(TitleUtil.toJson(potion));
+                buff.setDescription(chineseName);
+                buff.setApplyTypeEnum(BuffApplyTypeEnum.WEAR);
                 TitleUtil.addBuff(player, buff);
             }
         }

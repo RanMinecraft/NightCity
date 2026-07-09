@@ -93,9 +93,9 @@
         <dependency>
             <groupId>com.handy.playertitle</groupId>
             <artifactId>PlayerTitle</artifactId>
-            <version>4.8.0</version>
+            <version>5.0.4</version>
             <scope>system</scope>
-            <systemPath>/users/rain/desktop/Project/PlayerTitle-4.11.2-free.jar</systemPath>
+            <systemPath>/users/rain/desktop/Project/PlayerTitle-5.0.6-free.jar</systemPath>
         </dependency>
 
         <dependency>

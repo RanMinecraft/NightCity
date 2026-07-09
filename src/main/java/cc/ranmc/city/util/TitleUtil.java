@@ -1,10 +1,12 @@
 package cc.ranmc.city.util;
 
-import com.handy.playertitle.api.PlayerTitleApi;
-import com.handy.playertitle.api.param.TitleBuffParam;
-import com.handy.playertitle.api.param.TitleListParam;
-import com.handy.playertitle.constants.BuyTypeEnum;
-import com.handy.playertitle.lib.attribute.PotionEffectParam;
+import cn.handyplus.title.api.PlayerTitleApi;
+import cn.handyplus.title.api.param.TitleBuffParam;
+import cn.handyplus.title.api.param.TitleListParam;
+import cn.handyplus.title.api.param.TitleRequireParam;
+import cn.handyplus.title.constants.BuyTypeEnum;
+import cn.handyplus.title.lib.JsonUtil;
+import cn.handyplus.title.lib.attribute.PotionEffectParam;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -35,6 +37,15 @@ public class TitleUtil {
     public static final int TITLE_NAME_PRICE = 20;
     public static final int TITLE_BUFF_PRE_PRICE = 20;
 
+    private static PotionEffectParam parsePotionEffectParam(String buffContent) {
+        if (buffContent == null || buffContent.isEmpty()) return new PotionEffectParam();
+        return JsonUtil.toBean(buffContent, PotionEffectParam.class);
+    }
+
+    public static String toJson(PotionEffectParam param) {
+        return JsonUtil.toJson(param);
+    }
+
     public static void openGUI(Player player) {
         Inventory inventory = Bukkit.createInventory(null, 9, TITLE_GUI_TITLE);
         inventory.setItem(0, PANE);
@@ -50,9 +61,13 @@ public class TitleUtil {
         inventory.setItem(3, PANE);
 
         List<String> lore = new ArrayList<>(List.of(color("&b价格:&e " + TITLE_BUFF_PRE_PRICE + "元/级")));
-        buffMap.getOrDefault(player.getName(), new ArrayList<>()).forEach(buff ->
-                lore.add(color("&a" + buff.getPotionEffectParam().getPotionChinesizationName()
-                        + ": " + buff.getPotionEffectParam().getPotionLevel() + "级")));
+        buffMap.getOrDefault(player.getName(), new ArrayList<>()).forEach(buff -> {
+            PotionEffectParam potion = parsePotionEffectParam(buff.getBuffContent());
+            String chineseName = buff.getDescription() != null ? buff.getDescription()
+                    : (potion.getPotionChinesizationName() != null ? potion.getPotionChinesizationName() : potion.getPotionName());
+            int level = potion.getPotionLevel() != null ? potion.getPotionLevel() : 1;
+            lore.add(color("&a" + chineseName + ": " + level + "级"));
+        });
         lore.addAll(List.of("&e左键新增称号属性", "&e右键清空全部属性"));
         inventory.setItem(4, BasicUtil.getItem(Material.ENCHANTED_BOOK, 1,
                 color("&b称号属性"), lore));
@@ -88,19 +103,23 @@ public class TitleUtil {
     public static int getPrice(String playerName) {
         int price = TITLE_NAME_PRICE;
         for (TitleBuffParam param : buffMap.getOrDefault(playerName, new ArrayList<>())) {
-            price += param.getPotionEffectParam().getPotionLevel() * TITLE_BUFF_PRE_PRICE;
+            PotionEffectParam potion = parsePotionEffectParam(param.getBuffContent());
+            int level = potion.getPotionLevel() != null ? potion.getPotionLevel() : 1;
+            price += level * TITLE_BUFF_PRE_PRICE;
         }
         return price;
     }
 
     public static void give(String playerName) {
         TitleListParam param = new TitleListParam();
-        param.setAmount(99999);
-        param.setIsHide(1);
         param.setTitleName("&f[" + getName(playerName) + "&f]");
         param.setDescription(playerName + "定制专属称号");
-        param.setBuyTypeEnum(BuyTypeEnum.ACTIVITY);
-        param.setTitleBuffs(buffMap.getOrDefault(playerName, new ArrayList<>()));
+        param.setIsHide(1);
+        TitleRequireParam require = new TitleRequireParam();
+        require.setBuyType(BuyTypeEnum.ACTIVITY);
+        require.setAmount(99999);
+        param.setRequires(List.of(require));
+        param.setBuffs(buffMap.getOrDefault(playerName, new ArrayList<>()));
         Player player = Bukkit.getPlayerExact(playerName);
         UUID uuid;
         if (player == null) {
@@ -113,8 +132,8 @@ public class TitleUtil {
             print("&c无法发放定制称号" + playerName);
             return;
         }
-        int id = PlayerTitleApi.getInstance().add(param);
-        PlayerTitleApi.getInstance().set(uuid, id);
+        int id = PlayerTitleApi.addTitle(param);
+        PlayerTitleApi.setPlayerTitle(uuid, id);
     }
 
     public static String getName(String playerName) {
@@ -173,15 +192,18 @@ public class TitleUtil {
     public static void addBuff(Player player, TitleBuffParam newParam) {
         List<TitleBuffParam> list = buffMap.getOrDefault(player.getName(), new ArrayList<>());
         boolean exists = false;
+        PotionEffectParam newPotion = parsePotionEffectParam(newParam.getBuffContent());
+        String newPotionName = newPotion.getPotionName();
         for (TitleBuffParam param : list) {
-            PotionEffectParam buff = param.getPotionEffectParam();
-            if (buff.getPotionName().equals(newParam.getPotionEffectParam().getPotionName())) {
-                if (buff.getPotionLevel() == 2) {
+            PotionEffectParam potion = parsePotionEffectParam(param.getBuffContent());
+            if (potion.getPotionName().equals(newPotionName)) {
+                if (potion.getPotionLevel() != null && potion.getPotionLevel() >= 2) {
                     player.sendMessage(color("&c定制属性等级最高为2"));
                     TitleUtil.openGUI(player);
                     return;
                 }
-                buff.setPotionLevel(2);
+                potion.setPotionLevel(2);
+                param.setBuffContent(toJson(potion));
                 exists = true;
                 break;
             }
