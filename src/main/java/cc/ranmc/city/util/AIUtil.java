@@ -19,13 +19,12 @@ public class AIUtil {
 
     private static final int TIMEOUT = 60 * 1000;
     private static final Map<String,Integer> violationsMap = new HashMap<>();
-    public static final JSONArray msgArray = new JSONArray();
+    public static final JSONArray MSG_ARRAY = new JSONArray();
 
     public static void aiCheck() {
         if (!Main.getInstance().getConfig().getBoolean("ai.mute")) return;
-        long now = System.currentTimeMillis();
         // 无新消息，跳过
-        if (msgArray.isEmpty()) return;
+        if (MSG_ARRAY.isEmpty()) return;
         String systemPrompt = """
                 你是一个我的世界服务器聊天监控助手。
                 我会传入结构化聊天记录JSON数组，每条消息结构：
@@ -46,10 +45,10 @@ public class AIUtil {
                 {"violations":[{"player":"玩家名","reason":"违规原因描述"}]}
                 如果没有违规行为，请输出：{"violations":[]}""";
 
-        AIUtil.chat(systemPrompt, msgArray.toString())
-                .thenAccept(result -> {
-                    if (result == null || result.isEmpty()) return;
+        AIUtil.chat(systemPrompt, MSG_ARRAY.toString())
+                .whenComplete((result, ex) -> {
                     try {
+                        if (ex != null || result == null || result.isEmpty()) return;
                         JSONObject root = JSONObject.parseObject(result);
                         if (root == null || root.containsKey("error")) return;
                         JSONArray choices = root.getJSONArray("choices");
@@ -110,7 +109,7 @@ public class AIUtil {
                             }
                             if (Main.getInstance().getConfig().getBoolean("ai.broadcast")) {
                                 StringBuilder builder = new StringBuilder();
-                                msgArray.forEach(obj -> {
+                                MSG_ARRAY.forEach(obj -> {
                                     if (obj instanceof JSONObject json) {
                                         if (playerName.equals(json.getString("sender"))) {
                                             builder.append("\n");
@@ -126,6 +125,8 @@ public class AIUtil {
                         }
                     } catch (Exception e) {
                         print("AI 违规检测解析错误: " + e.getMessage() + "\n返回：" + result);
+                    } finally {
+                        MSG_ARRAY.clear();
                     }
                 });
     }
