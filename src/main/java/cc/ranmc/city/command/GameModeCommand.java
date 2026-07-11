@@ -19,7 +19,7 @@ public class GameModeCommand implements CommandExecutor {
                              String @NotNull [] args) {
         // 以下指令不能在控制台输入
         if (!(sender instanceof Player player)) {
-            print(color("&c该指令不能在控制台输入"));
+            print("&c该指令不能在控制台输入");
             return true;
         }
 

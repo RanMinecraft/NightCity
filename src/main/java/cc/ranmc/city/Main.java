@@ -13,6 +13,7 @@ import cc.ranmc.city.listener.GUIListener;
 import cc.ranmc.city.listener.MinePayListener;
 import cc.ranmc.city.listener.PlayerListener;
 import cc.ranmc.city.papi.Papi;
+import cc.ranmc.city.util.AIUtil;
 import cc.ranmc.city.util.BasicUtil;
 import cc.ranmc.city.util.MoneyUtil;
 import cc.ranmc.city.util.TreasureUtil;
@@ -108,6 +109,8 @@ public class Main extends JavaPlugin implements Listener{
 
         int delay = getConfig().getInt("treasure.time", 600) * 20;
         Bukkit.getScheduler().runTaskTimer(this, TreasureUtil::generate, delay, delay);
+
+        Bukkit.getScheduler().runTaskTimer(this, AIUtil::aiCheck, 60 * 20, 60 * 20);
 	}
 	
 	// 加载配置文件
