@@ -104,7 +104,7 @@ public class AIUtil {
                                 // 警告
                                 Player player = Bukkit.getPlayerExact(playerName);
                                 if (player != null) {
-                                    player.sendMessage(color("&e检测到您的发言中存在不当内容\n文明用语是尊重他人的具体表现\n继续不当发言将面临禁言或封禁"));
+                                    player.sendMessage(color("&e检测发言含不当内容\n文明发言尊重他人\n持续违规将禁言封禁"));
                                 }
                             }
                             if (Main.getInstance().getConfig().getBoolean("ai.broadcast")) {
