@@ -119,6 +119,7 @@ public class AIUtil {
                                     player.sendMessage(color("&e检测发言含不当内容\n文明发言尊重他人\n持续违规将禁言封禁"));
                                 }
                             }
+                            count++;
                             if (Main.getInstance().getConfig().getBoolean("ai.broadcast")) {
                                 StringBuilder builder = new StringBuilder();
                                 MSG_ARRAY.forEach(obj -> {
@@ -134,7 +135,7 @@ public class AIUtil {
                                         "\n违规次数:" + count +
                                         "\n上下文:" + builder);
                             }
-                            violationsMap.put(playerName, count + 1);
+                            violationsMap.put(playerName, count);
                         }
                     } catch (Exception e) {
                         print("AI 违规检测解析错误: " + e.getMessage() + "\n返回：" + result);
