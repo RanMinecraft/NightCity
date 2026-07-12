@@ -131,6 +131,7 @@ public class AIUtil {
                                 });
                                 BroadcastUtil.sendFeishu("检测到违规玩家:" + playerName +
                                         "\n原因:" + reason +
+                                        "\n违规次数:" + count +
                                         "\n上下文:" + builder);
                             }
                             violationsMap.put(playerName, count + 1);
