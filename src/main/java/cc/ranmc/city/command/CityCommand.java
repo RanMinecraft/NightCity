@@ -36,6 +36,22 @@ public class CityCommand implements CommandExecutor {
 
                 return true;
             }
+            // 停止服务器倒计时
+            if (args[0].equalsIgnoreCase("stop")) {
+                if (!sender.hasPermission("city.admin")) {
+                    sender.sendMessage("§b[夜城] §c你没有足够的权限执行");
+                    return true;
+                }
+                Bukkit.broadcastMessage("§b[夜城] §c⚠ 服务器将在10秒后重启，请大家不要呆在死亡掉落的世界！");
+                for (int i = 10; i > 0; i--) {
+                    int second = i;
+                    Bukkit.getScheduler().runTaskLater(Main.getInstance(), () ->
+                            Bukkit.broadcastMessage("§b[夜城] §c服务器将在 " + second + " 秒后重启！"), (long) (10 - second + 1) * 20);
+                }
+                Bukkit.getScheduler().runTaskLater(Main.getInstance(), () ->
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop"), 11 * 20);
+                return true;
+            }
             // 存钱
             if (args[0].equalsIgnoreCase("money") &&
                     sender instanceof Player player) {

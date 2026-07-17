@@ -15,7 +15,12 @@ public class CityTabComplete implements TabCompleter {
                                       @NotNull Command command,
                                       @NotNull String alias,
                                       String[] args) {
-        if (args.length == 1) return List.of("info", "money", "vip", "title");
+        if (args.length == 1) {
+            if (sender.hasPermission("city.admin")) {
+                return List.of("info", "money", "vip", "title", "reload", "stop");
+            }
+            return List.of("info", "money", "vip", "title");
+        }
         if (sender.hasPermission("city.admin")) {
             if (args.length == 2 && List.of("info", "vip", "title").contains(args[0])) return null;
             if (args.length == 3 && args[0].equals("vip")) return List.of("30");

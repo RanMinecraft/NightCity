@@ -8,7 +8,6 @@ import cc.ranmc.city.command.CityTabComplete;
 import cc.ranmc.city.command.GameModeCommand;
 import cc.ranmc.city.listener.BlockListener;
 import cc.ranmc.city.listener.CatSeedLoginListener;
-import cc.ranmc.city.listener.ChatListener;
 import cc.ranmc.city.listener.FurnaceListener;
 import cc.ranmc.city.listener.GUIListener;
 import cc.ranmc.city.listener.MinePayListener;
@@ -52,7 +51,6 @@ public class Main extends JavaPlugin implements Listener{
         Bukkit.getPluginManager().registerEvents(new GUIListener(), this);
         Bukkit.getPluginManager().registerEvents(new CatSeedLoginListener(), this);
         Bukkit.getPluginManager().registerEvents(new MinePayListener(), this);
-        Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 
         FurnaceRecipe coinRecipe100 = new FurnaceRecipe(
                 new NamespacedKey(this, "city_coin_100"),
