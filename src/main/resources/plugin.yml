@@ -2,7 +2,7 @@ name: NightCity
 main: cc.ranmc.city.Main
 description: NightCity Forever
 author: Ranica
-version: Release 7.6
+version: Release 7.7
 api-version: "26.2"
 softdepend: [Vault,PlaceholderAPI,CatSeedLogin,ViaVersion,MinePay,PlayerTitle]
 
