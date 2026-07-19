@@ -2,6 +2,7 @@ package cc.ranmc.city.listener;
 
 import cc.ranmc.city.util.AIUtil;
 import com.alibaba.fastjson2.JSONObject;
+import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -15,7 +16,7 @@ public class ChatListener implements Listener {
         if (event.isCancelled()) return;
         JSONObject json = new JSONObject();
         json.put("sender", event.getPlayer().getName());
-        json.put("content", event.getMessage());
+        json.put("content", ChatColor.stripColor(event.getMessage()));
         synchronized (AIUtil.MSG_ARRAY) {
             AIUtil.MSG_ARRAY.add(json);
         }
@@ -31,7 +32,7 @@ public class ChatListener implements Listener {
             if (parts.length >= 3) {
                 JSONObject json = new JSONObject();
                 json.put("sender", event.getPlayer().getName());
-                json.put("content", "[私聊] " + parts[2]);
+                json.put("content", "[私聊] " + ChatColor.stripColor(parts[2]));
                 synchronized (AIUtil.MSG_ARRAY) {
                     AIUtil.MSG_ARRAY.add(json);
                 }

@@ -1,6 +1,5 @@
 package cc.ranmc.city.papi;
 
-
 import cc.ranmc.city.Main;
 import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
