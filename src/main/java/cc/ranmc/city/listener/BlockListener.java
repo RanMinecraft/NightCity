@@ -26,7 +26,7 @@ public class BlockListener implements Listener {
                 .equalsIgnoreCase(Main.getInstance().getConfig().getString("ProtectWorld"))) {
             for (String ore : Main.getInstance().getConfig().getStringList("ProtectOre")) {
                 if (event.getBlock().getType() == Material.getMaterial(ore)) {
-                    player.sendMessage("§b[夜城] §c请前往资源世界挖矿");
+                    player.sendMessage(color("&b[夜城] &c请前往资源世界挖矿"));
                     event.setExpToDrop(0);
                     event.setDropItems(false);
                     return;

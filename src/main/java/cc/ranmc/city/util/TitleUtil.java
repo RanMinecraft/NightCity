@@ -88,15 +88,15 @@ public class TitleUtil {
         lore.add(color("&e点击更改称号名称"));
         lore.add(" ");
         lore.add(color("&9颜色符号实例"));
-        lore.add("§f&a亮绿->"+ color("&a亮绿")+"  §f&b亮蓝->"+ color("&b亮蓝"));
-        lore.add("§f&c红色->"+ color("&c红色")+"  §f&d粉色->"+ color("&d粉色"));
-        lore.add("§f&e黄色->"+ color("&e黄色")+"  §f&f白色->"+ color("&f白色"));
-        lore.add("§f&0黑色->"+ color("&0黑色")+"  §f&1蓝色->"+ color("&1蓝色"));
-        lore.add("§f&2绿色->"+ color("&2绿色")+"  §f&3青色->"+ color("&3青色"));
-        lore.add("§f&4深红->"+ color("&4深红")+"  §f&5紫色->"+ color("&5紫色"));
-        lore.add("§f&6金色->"+ color("&6金色")+"  §f&7浅灰->"+ color("&7浅灰"));
-        lore.add("§f&8深灰->"+ color("&8深灰")+"  §f&9浅蓝->"+ color("&9浅蓝"));
-        lore.add("§f&#2196f3->"+ rgbString("&#2196f3 支持6位RGB颜色代码"));
+        lore.add("&f&a亮绿->"+ color("&a亮绿")+"  &f&b亮蓝->"+ color("&b亮蓝"));
+        lore.add("&f&c红色->"+ color("&c红色")+"  &f&d粉色->"+ color("&d粉色"));
+        lore.add("&f&e黄色->"+ color("&e黄色")+"  &f&f白色->"+ color("&f白色"));
+        lore.add("&f&0黑色->"+ color("&0黑色")+"  &f&1蓝色->"+ color("&1蓝色"));
+        lore.add("&f&2绿色->"+ color("&2绿色")+"  &f&3青色->"+ color("&3青色"));
+        lore.add("&f&4深红->"+ color("&4深红")+"  &f&5紫色->"+ color("&5紫色"));
+        lore.add("&f&6金色->"+ color("&6金色")+"  &f&7浅灰->"+ color("&7浅灰"));
+        lore.add("&f&8深灰->"+ color("&8深灰")+"  &f&9浅蓝->"+ color("&9浅蓝"));
+        lore.add("&f&#2196f3->"+ rgbString("&#2196f3 支持6位RGB颜色代码"));
         return lore;
     }
 

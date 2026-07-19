@@ -35,7 +35,7 @@ public class BasicUtil {
     public static String color(String text) {
         if (text == null) {
             text = "";
-            print("§b[夜城] §c插件输出文本信息出错");
+            print("&b[夜城] &c插件输出文本信息出错");
         } else {
             text=text.replace("&", "§");
         }
@@ -45,7 +45,7 @@ public class BasicUtil {
     public static String color(String text, Player p) {
         if (text == null) {
             text = "";
-            print("§b[夜城] §c插件输出文本信息出错");
+            print("&b[夜城] &c插件输出文本信息出错");
         } else {
             text=text.replace("&", "§")
                     .replace("%player%",p.getName())
@@ -169,10 +169,10 @@ public class BasicUtil {
 
     public static boolean checkPlugin(String pluginName) {
         if (Bukkit.getPluginManager().getPlugin(pluginName) != null) {
-            print("§b[夜城] §a成功加载" + pluginName + "插件");
+            print("&b[夜城] &a成功加载" + pluginName + "插件");
             return true;
         } else {
-            print("§b[夜城] §c无法找到" + pluginName + "插件,部分功能受限");
+            print("&b[夜城] &c无法找到" + pluginName + "插件,部分功能受限");
             return false;
         }
     }
