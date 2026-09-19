@@ -73,16 +73,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>26.0.2</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.46</version>
+            <version>1.18.48</version>
             <scope>provided</scope>
         </dependency>
 
@@ -123,13 +116,35 @@
             <scope>system</scope>
             <systemPath>/users/rain/desktop/Project/MinePay-Beta9-3.9.0.jar</systemPath>
         </dependency>
-
-        <!--<dependency>
-            <groupId>com.comphenix.protocol</groupId>
-            <artifactId>ProtocolLib</artifactId>
-            <version>5.1.0</version>
-            <scope>provided</scope>
-        </dependency>-->
     </dependencies>
-    
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>/users/rain/Desktop/Paper/plugins/NightCity.jar</outputFile>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>com.github.MilkBowl:VaultAPI</exclude>
+                                    <exclude>cc.baka9.catseedlogin:CatSeedLogin</exclude>
+                                    <exclude>com.handy.playertitle:PlayerTitle</exclude>
+                                    <exclude>top.minepay:MinePayApi</exclude>
+                                </excludes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
