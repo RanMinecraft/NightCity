@@ -1,7 +1,6 @@
 package cc.ranmc.city.util;
 
 import cc.ranmc.city.Main;
-import cc.ranmc.city.papi.Papi;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
